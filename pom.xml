@@ -9,6 +9,14 @@
     <name>baseDdd</name>
     <description>Project for ddd base, SDA</description>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub OWNER Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/lacafetalab/java-base-ddd</url>
+        </repository>
+    </distributionManagement>
+
     <properties>
         <java.version>8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
