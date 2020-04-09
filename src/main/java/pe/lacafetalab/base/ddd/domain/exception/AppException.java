@@ -3,10 +3,10 @@ package pe.lacafetalab.base.ddd.domain.exception;
 import pe.lacafetalab.base.ddd.domain.code.AppCode;
 
 public class AppException extends RuntimeException {
+	private static final long serialVersionUID = 1L;
 
     // https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
-
-    private Integer statusCode;
+	private Integer statusCode;
     private Integer code;
     private String message;
 

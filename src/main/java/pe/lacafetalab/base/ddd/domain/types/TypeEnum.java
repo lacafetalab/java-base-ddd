@@ -1,15 +1,13 @@
 package pe.lacafetalab.base.ddd.domain.types;
 
-import pe.lacafetalab.base.ddd.domain.utils.NumberUtils;
+public abstract class TypeEnum<E extends Enum<E>> extends TypeBase<Enum<E>> {
 
-public abstract class TypeDouble extends TypeBase<Double> {
-
-	public TypeDouble(Double value) {
+	public TypeEnum(E value) {
 		super(value);
 	}
 
-	public Double roundValue(int numDecimals) {
-		return NumberUtils.round(value(), numDecimals);
+	public String name() {
+		return value().name();
 	}
 
 	@Override
@@ -21,6 +19,7 @@ public abstract class TypeDouble extends TypeBase<Double> {
 	}
 
 	@Override
+	@SuppressWarnings("rawtypes")
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -28,21 +27,13 @@ public abstract class TypeDouble extends TypeBase<Double> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TypeDouble other = (TypeDouble) obj;
+		TypeEnum other = (TypeEnum) obj;
 		if (value() == null) {
 			if (other.value() != null)
 				return false;
 		} else if (!value().equals(other.value()))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		if (this.isNull()) {
-			return "";
-		}
-		return Double.toString(this.value());
 	}
 
 }

@@ -1,15 +1,23 @@
 package pe.lacafetalab.base.ddd.domain.types;
 
-import pe.lacafetalab.base.ddd.domain.utils.NumberUtils;
+import pe.lacafetalab.base.ddd.domain.exception.BadRequestException;
 
-public abstract class TypeDouble extends TypeBase<Double> {
+public abstract class TypeLong extends TypeBase<Long> {
 
-	public TypeDouble(Double value) {
+	public TypeLong(Long value) {
 		super(value);
 	}
 
-	public Double roundValue(int numDecimals) {
-		return NumberUtils.round(value(), numDecimals);
+	public void verifyGreaterThanZero(BadRequestException ex) {
+		if (value() == null || value() <= 0) {
+			throw ex;
+		}
+	}
+
+	public void verifyMinorThanZero(BadRequestException ex) {
+		if (value() == null || value() >= 0) {
+			throw ex;
+		}
 	}
 
 	@Override
@@ -28,7 +36,7 @@ public abstract class TypeDouble extends TypeBase<Double> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TypeDouble other = (TypeDouble) obj;
+		TypeLong other = (TypeLong) obj;
 		if (value() == null) {
 			if (other.value() != null)
 				return false;
@@ -42,7 +50,6 @@ public abstract class TypeDouble extends TypeBase<Double> {
 		if (this.isNull()) {
 			return "";
 		}
-		return Double.toString(this.value());
+		return Long.toString(this.value());
 	}
-
 }

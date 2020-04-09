@@ -5,7 +5,7 @@
 
     <groupId>pe.lacafetalab.base</groupId>
     <artifactId>lacafetalab-base-ddd</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.3</version>
     <name>baseDdd</name>
     <description>Project for ddd base, SDA</description>
 
@@ -54,6 +54,11 @@
                     <artifactId>*</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+        	<groupId>org.apache.commons</groupId>
+        	<artifactId>commons-lang3</artifactId>
+        	<version>3.9</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>

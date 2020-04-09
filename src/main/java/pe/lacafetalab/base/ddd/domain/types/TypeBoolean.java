@@ -1,15 +1,9 @@
 package pe.lacafetalab.base.ddd.domain.types;
 
-import pe.lacafetalab.base.ddd.domain.utils.NumberUtils;
+public abstract class TypeBoolean extends TypeBase<Boolean> {
 
-public abstract class TypeDouble extends TypeBase<Double> {
-
-	public TypeDouble(Double value) {
+	public TypeBoolean(Boolean value) {
 		super(value);
-	}
-
-	public Double roundValue(int numDecimals) {
-		return NumberUtils.round(value(), numDecimals);
 	}
 
 	@Override
@@ -28,7 +22,7 @@ public abstract class TypeDouble extends TypeBase<Double> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TypeDouble other = (TypeDouble) obj;
+		TypeBoolean other = (TypeBoolean) obj;
 		if (value() == null) {
 			if (other.value() != null)
 				return false;
@@ -42,7 +36,6 @@ public abstract class TypeDouble extends TypeBase<Double> {
 		if (this.isNull()) {
 			return "";
 		}
-		return Double.toString(this.value());
+		return Boolean.toString(this.value());
 	}
-
 }
