@@ -1,13 +1,14 @@
 package pe.lacafetalab.base.ddd.domain.exception
 
 import pe.lacafetalab.base.ddd.domain.code.SharedCode
+import pe.lacafetalab.base.ddd.domain.ErrorCode
 import spock.lang.Specification
 
 class AppExceptionSpec extends Specification {
 
     void 'get lanza el error generico'() {
         when:
-            throw new AppException(400, SharedCode.create(1), "error A")
+            throw new AppException(400, SharedCode.create(ErrorCode.BAD_ID_VALUE_NULL), "error A")
         then:
             thrown AppException
     }
@@ -15,7 +16,7 @@ class AppExceptionSpec extends Specification {
 
     void 'get value'() {
         when:
-            throw new AppException(a, SharedCode.create(b), c)
+            throw new AppException(a, SharedCode.create(ErrorCode.BAD_ID_VALUE_NULL), c)
         then:
             def error = thrown(AppException)
             error.getStatusCode() == d
@@ -24,6 +25,6 @@ class AppExceptionSpec extends Specification {
 
         where:
             a   | b | c       || d    | e         | f
-            400 | 5 | "texto" || 400 || 400000005 | "texto"
+            400 | 1 | "texto" || 400 || 400000001 | "texto"
     }
 }
