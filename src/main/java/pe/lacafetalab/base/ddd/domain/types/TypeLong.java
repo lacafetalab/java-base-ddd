@@ -8,6 +8,12 @@ public abstract class TypeLong extends TypeBase<Long> {
 		super(value);
 	}
 
+	public TypeLong(String value, BadRequestException ex) {
+		super(org.apache.commons.lang3.math.NumberUtils.isDigits(value)
+				? org.apache.commons.lang3.math.NumberUtils.createLong(value)
+				: null);
+	}
+
 	public void verifyGreaterThanZero(BadRequestException ex) {
 		if (value() == null || value() <= 0) {
 			throw ex;

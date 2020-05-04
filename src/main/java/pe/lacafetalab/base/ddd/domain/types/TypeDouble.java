@@ -1,5 +1,6 @@
 package pe.lacafetalab.base.ddd.domain.types;
 
+import pe.lacafetalab.base.ddd.domain.exception.BadRequestException;
 import pe.lacafetalab.base.ddd.domain.utils.NumberUtils;
 
 public abstract class TypeDouble extends TypeBase<Double> {
@@ -8,8 +9,26 @@ public abstract class TypeDouble extends TypeBase<Double> {
 		super(value);
 	}
 
+	public TypeDouble(String value, BadRequestException ex) {
+		super(org.apache.commons.lang3.math.NumberUtils.isCreatable(value)
+				? org.apache.commons.lang3.math.NumberUtils.createDouble(value)
+				: null);
+	}
+
 	public Double roundValue(int numDecimals) {
 		return NumberUtils.round(value(), numDecimals);
+	}
+
+	public void verifyGreaterThanZero(BadRequestException ex) {
+		if (value() == null || value() <= 0) {
+			throw ex;
+		}
+	}
+
+	public void verifyMinorThanZero(BadRequestException ex) {
+		if (value() == null || value() >= 0) {
+			throw ex;
+		}
 	}
 
 	@Override

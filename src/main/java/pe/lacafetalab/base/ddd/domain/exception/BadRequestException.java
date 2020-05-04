@@ -1,14 +1,9 @@
 package pe.lacafetalab.base.ddd.domain.exception;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import pe.lacafetalab.base.ddd.domain.code.AppCode;
 
 public class BadRequestException extends AppException {
 	private static final long serialVersionUID = 1L;
-
-	private static final Logger LOG = LoggerFactory.getLogger(BadRequestException.class.getName());
-
 	private static final int STATUS_CODE = 400;
 
 	/**
@@ -18,14 +13,28 @@ public class BadRequestException extends AppException {
 	 *
 	 * @param code
 	 */
+
 	public BadRequestException(AppCode code) {
-		super(STATUS_CODE, code, "");
-		LOG.error(this.getCode().toString());
+		this(code, "");
+	}
+
+	public BadRequestException(Integer code) {
+		this(code, "");
 	}
 
 	public BadRequestException(AppCode code, String message) {
-		super(STATUS_CODE, code, message);
-		LOG.error(this.getCode().toString() + " - " + this.getMessage());
+		this(code, message, null);
 	}
 
+	public BadRequestException(Integer code, String message) {
+		this(code, message, null);
+	}
+
+	public BadRequestException(AppCode code, String message, Object data) {
+		super(STATUS_CODE, code, message, data, null);
+	}
+
+	public BadRequestException(Integer code, String message, Object data) {
+		super(STATUS_CODE, code, message, data, null);
+	}
 }

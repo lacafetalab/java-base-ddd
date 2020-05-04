@@ -1,9 +1,27 @@
 package pe.lacafetalab.base.ddd.domain.types;
 
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import pe.lacafetalab.base.ddd.domain.exception.BadRequestException;
+
 public abstract class TypeBoolean extends TypeBase<Boolean> {
 
 	public TypeBoolean(Boolean value) {
 		super(value);
+	}
+
+	public TypeBoolean(String value) {
+		super(BooleanUtils.toBooleanObject(value));
+	}
+
+	public void verifyIsValid(String value, BadRequestException ex, boolean allowNull) {
+		if (StringUtils.isNotBlank(value) && !value.toLowerCase().equals("true")
+				&& !value.toLowerCase().equals("false")) {
+			throw ex;
+		} else if (!allowNull && StringUtils.isBlank(value)) {
+			throw ex;
+		}
 	}
 
 	@Override

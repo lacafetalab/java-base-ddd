@@ -8,6 +8,12 @@ public abstract class TypeInteger extends TypeBase<Integer> {
 		super(value);
 	}
 
+	public TypeInteger(String value, BadRequestException ex) {
+		super(org.apache.commons.lang3.math.NumberUtils.isDigits(value)
+				? org.apache.commons.lang3.math.NumberUtils.createInteger(value)
+				: null);
+	}
+
 	public void verifyGreaterThanZero(BadRequestException ex) {
 		if (value() == null || value() <= 0) {
 			throw ex;
@@ -18,31 +24,6 @@ public abstract class TypeInteger extends TypeBase<Integer> {
 		if (value() == null || value() >= 0) {
 			throw ex;
 		}
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((value() == null) ? 0 : value().hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		TypeInteger other = (TypeInteger) obj;
-		if (value() == null) {
-			if (other.value() != null)
-				return false;
-		} else if (!value().equals(other.value()))
-			return false;
-		return true;
 	}
 
 	@Override
