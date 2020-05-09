@@ -7,7 +7,7 @@ import pe.lacafetalab.base.ddd.domain.code.AppCode;
 public class LoginException extends AppException {
 	private static final long serialVersionUID = 1L;
 
-	private static final int STATUS_CODE = 404;
+	private static final int STATUS_CODE = 401;
 
 	public LoginException(AppCode code) {
 		super(STATUS_CODE, code, StringUtils.EMPTY, null, null);

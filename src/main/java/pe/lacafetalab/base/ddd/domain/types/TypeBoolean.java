@@ -7,6 +7,10 @@ import pe.lacafetalab.base.ddd.domain.exception.BadRequestException;
 
 public abstract class TypeBoolean extends TypeBase<Boolean> {
 
+	public TypeBoolean() {
+		super();
+	}
+
 	public TypeBoolean(Boolean value) {
 		super(value);
 	}

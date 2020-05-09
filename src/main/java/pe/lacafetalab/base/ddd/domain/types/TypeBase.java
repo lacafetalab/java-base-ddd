@@ -1,11 +1,12 @@
 package pe.lacafetalab.base.ddd.domain.types;
 
-import org.apache.commons.lang3.StringUtils;
-
 import pe.lacafetalab.base.ddd.domain.exception.BadRequestException;
 
 public abstract class TypeBase<T> {
 	private T value;
+
+	public TypeBase() {
+	}
 
 	public TypeBase(T value) {
 		this.value = value;
@@ -27,17 +28,6 @@ public abstract class TypeBase<T> {
 		if (value() == null) {
 			throw ex;
 		}
-	}
-
-	public void verifyIsNotEmpty(String name, int errorCode) {
-		verifyIsNotEmpty(new BadRequestException(errorCode, String.format("The %s must not be null", name)));
-	}
-
-	public void verifyIsNotEmpty(BadRequestException ex) {
-		if (StringUtils.isBlank(value().toString())) {
-			throw ex;
-		}
-
 	}
 
 	@Override

@@ -5,8 +5,20 @@ import pe.lacafetalab.base.ddd.domain.utils.NumberUtils;
 
 public abstract class TypeDouble extends TypeBase<Double> {
 
+	public TypeDouble() {
+		super();
+	}
+
 	public TypeDouble(Double value) {
 		super(value);
+	}
+
+	public TypeDouble(Double value, boolean ifNullZero) {
+		super(ifNullZero && value == null ? Double.valueOf(0) : value);
+	}
+
+	public boolean isZero() {
+		return value() != null && value() == 0;
 	}
 
 	public TypeDouble(String value, BadRequestException ex) {
@@ -19,14 +31,50 @@ public abstract class TypeDouble extends TypeBase<Double> {
 		return NumberUtils.round(value(), numDecimals);
 	}
 
-	public void verifyGreaterThanZero(BadRequestException ex) {
+	public void verifyIsGreaterThanZero(BadRequestException ex) {
 		if (value() == null || value() <= 0) {
 			throw ex;
 		}
 	}
 
-	public void verifyMinorThanZero(BadRequestException ex) {
+	public void verifyIsGreaterThanOrEqualToZero(BadRequestException ex) {
+		if (value() == null || value() < 0) {
+			throw ex;
+		}
+	}
+
+	public void verifyIsGreaterThanOrEqual(int limit, BadRequestException ex) {
+		if (value() == null || value() < limit) {
+			throw ex;
+		}
+	}
+
+	public void verifyIsGreaterThan(int limit, BadRequestException ex) {
+		if (value() == null || value() <= limit) {
+			throw ex;
+		}
+	}
+
+	public void verifyIsMinorThanZero(BadRequestException ex) {
 		if (value() == null || value() >= 0) {
+			throw ex;
+		}
+	}
+
+	public void verifyIsMinorThanOrEqualToZero(BadRequestException ex) {
+		if (value() == null || value() > 0) {
+			throw ex;
+		}
+	}
+
+	public void verifyIsMinorThanOrEqual(int limit, BadRequestException ex) {
+		if (value() == null || value() > limit) {
+			throw ex;
+		}
+	}
+
+	public void verifyIsMinorThan(int limit, BadRequestException ex) {
+		if (value() == null || value() >= limit) {
 			throw ex;
 		}
 	}

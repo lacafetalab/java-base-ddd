@@ -5,8 +5,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
-public class TypeList<T> extends TypeBase<List<T>> {
+import pe.lacafetalab.base.ddd.domain.exception.BadRequestException;
+
+public abstract class TypeList<T> extends TypeBase<List<T>> {
+
+	public TypeList() {
+		super(new ArrayList<>());
+	}
 
 	public TypeList(List<T> values) {
 		super(Optional.ofNullable(values).orElse(new ArrayList<>()));
@@ -20,6 +28,12 @@ public class TypeList<T> extends TypeBase<List<T>> {
 		return values() == null || values().isEmpty();
 	}
 
+	public void verifyIsNotEmpty(BadRequestException ex) {
+		if (isEmpty()) {
+			throw ex;
+		}
+	}
+
 	public boolean areAllUnique() {
 		if (isEmpty()) {
 			return true;
@@ -30,6 +44,10 @@ public class TypeList<T> extends TypeBase<List<T>> {
 
 	public List<T> distinct() {
 		return new ArrayList<>(new HashSet<>(values()));
+	}
+
+	public <R> List<R> asList(Function<T, R> f) {
+		return values().stream().map(v -> f.apply(v)).collect(Collectors.toList());
 	}
 
 	@Override

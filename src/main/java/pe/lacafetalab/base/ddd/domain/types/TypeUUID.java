@@ -22,6 +22,5 @@ public abstract class TypeUUID extends TypeString {
 		} catch (IllegalArgumentException exception) {
 			throw new BadRequestException(SharedCode.create(ErrorCode.BAD_UUID_VALUE), "Uuid value no valid");
 		}
-
 	}
 }

@@ -1,12 +1,20 @@
 package pe.lacafetalab.base.ddd.domain.types;
 
-public abstract class TypeEnum<E extends Enum<E>> extends TypeBase<Enum<E>> {
+import java.util.Optional;
+
+import pe.lacafetalab.base.ddd.domain.exception.BadRequestException;
+
+public abstract class TypeEnum<E extends Enum<E>> extends TypeBase<E> {
 
 	public TypeEnum(E value) {
 		super(value);
 	}
 
-	public String name() {
+	public TypeEnum(Class<E> clazz, String str, BadRequestException ex) {
+		this(valueFrom(clazz, str).orElseThrow(() -> ex));
+	}
+
+	public final String name() {
 		return value().name();
 	}
 
@@ -36,4 +44,20 @@ public abstract class TypeEnum<E extends Enum<E>> extends TypeBase<Enum<E>> {
 		return true;
 	}
 
+	public static <E extends Enum<E>> Optional<E> valueFrom(Class<E> clazz, String str) {
+		try {
+			return Optional.of(Enum.valueOf(clazz, str));
+		} catch (IllegalArgumentException | NullPointerException e) {
+			return Optional.empty();
+		}
+	}
+
+	public static <E extends Enum<E>> boolean isValid(Class<E> clazz, String str) {
+		return valueFrom(clazz, str).isPresent();
+	}
+
+	@Override
+	public final String toString() {
+		return name();
+	}
 }

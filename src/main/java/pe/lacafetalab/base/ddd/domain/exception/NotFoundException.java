@@ -13,7 +13,15 @@ public class NotFoundException extends AppException {
 		super(STATUS_CODE, code, StringUtils.EMPTY, null, null);
 	}
 
+	public NotFoundException(Integer code) {
+		super(STATUS_CODE, code, StringUtils.EMPTY, null, null);
+	}
+
 	public NotFoundException(AppCode code, String message) {
+		super(STATUS_CODE, code, message, null, null);
+	}
+
+	public NotFoundException(Integer code, String message) {
 		super(STATUS_CODE, code, message, null, null);
 	}
 }
