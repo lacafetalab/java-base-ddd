@@ -2,7 +2,8 @@ package pe.lacafetalab.base.ddd.domain.exception;
 
 import java.util.Optional;
 
-import pe.lacafetalab.base.ddd.domain.code.AppCode;
+import pe.lacafetalab.base.ddd.domain.code.AppCoding;
+import pe.lacafetalab.base.ddd.domain.code.EnumCodeType;
 
 public class AppException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
@@ -17,14 +18,22 @@ public class AppException extends RuntimeException {
 		this(500, 500, e.getMessage(), new Object(), e);
 	}
 
-	public AppException(Integer statusCode, AppCode code, String message, Object data, Throwable ex) {
+	public <C extends Enum<C> & EnumCodeType> AppException(Integer statusCode, C code, String message, Object data,
+			Throwable ex) {
 		this(statusCode, generateCode(statusCode, code), message, data, ex);
 	}
 
-	public AppException(Integer statusCode, AppCode code, String message) {
+	public <C extends Enum<C> & EnumCodeType> AppException(Integer statusCode, C code, String message) {
 		this(statusCode, generateCode(statusCode, code), message, null, null);
 	}
 
+	/**
+	 * Instanstiate a AppException object.
+	 *
+	 * @deprecated Try to use the one with code EnumCodeType enum object parameter.
+	 * 
+	 */
+	@Deprecated
 	public AppException(Integer statusCode, Integer code, String message, Object data, Throwable ex) {
 		super(ex);
 		this.statusCode = statusCode;
@@ -33,9 +42,8 @@ public class AppException extends RuntimeException {
 		this.data = Optional.ofNullable(data).orElse(new Object());
 	}
 
-	private static Integer generateCode(Integer statusCode, AppCode code) {
-		String concatcode = statusCode.toString().concat(code.value());
-		return Integer.parseInt(concatcode);
+	private static <C extends Enum<C> & EnumCodeType> Integer generateCode(Integer statusCode, C code) {
+		return AppCoding.value(statusCode, code);
 	}
 
 	public Integer getStatusCode() {

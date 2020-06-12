@@ -1,5 +1,6 @@
 package pe.lacafetalab.base.ddd.domain.types;
 
+import pe.lacafetalab.base.ddd.domain.code.EnumCodeType;
 import pe.lacafetalab.base.ddd.domain.exception.BadRequestException;
 
 public abstract class TypeBase<T> {
@@ -20,7 +21,12 @@ public abstract class TypeBase<T> {
 		return this.value == null;
 	}
 
+	@Deprecated
 	public void verifyIsNotNull(String name, int errorCode) {
+		verifyIsNotNull(new BadRequestException(errorCode, String.format("The %s must not be null", name)));
+	}
+
+	public <C extends Enum<C> & EnumCodeType> void verifyIsNotNull(String name, C errorCode) {
 		verifyIsNotNull(new BadRequestException(errorCode, String.format("The %s must not be null", name)));
 	}
 

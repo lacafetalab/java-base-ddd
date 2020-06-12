@@ -1,6 +1,5 @@
 package pe.lacafetalab.base.ddd.domain.utils;
 
-import pe.lacafetalab.base.ddd.domain.ErrorCode;
 import pe.lacafetalab.base.ddd.domain.code.SharedCode;
 import pe.lacafetalab.base.ddd.domain.exception.BadRequestException;
 
@@ -15,7 +14,7 @@ public class NumberUtils {
 			return null;
 		}
 		if (numDecimals < 1) {
-			throw new BadRequestException(SharedCode.create(ErrorCode.BAD_NUM_ROUND_DECIMALS),
+			throw new BadRequestException(SharedCode.BAD_NUM_ROUND_DECIMALS,
 					String.format("Value for numDecimals[%d] not valid", numDecimals));
 		}
 		double exp = Math.pow(10.0, numDecimals);

@@ -1,19 +1,24 @@
 package pe.lacafetalab.base.ddd.domain.code;
 
-import pe.lacafetalab.base.ddd.domain.ErrorCode;
+public enum SharedCode implements EnumCodeType {
 
-public class SharedCode extends AppCode {
+	BAD_ID_VALUE_NULL(1), BAD_NUM_ROUND_DECIMALS(2), BAD_UUID_VALUE(3),
 
-	public SharedCode(ErrorCode code) {
-		super(code);
+	TOKEN_EXPIRED(4), BAD_CREDENTIALS(5), BAD_ROLE_VALUE(6), UNEXPECTED_ROLE(7);
+
+	static String MODULE_CLASS = "00";
+
+	private int value;
+
+	SharedCode(int value) {
+		this.value = value;
 	}
 
-	public static SharedCode create(ErrorCode code) {
-		return new SharedCode(code);
+	public int value() {
+		return this.value;
 	}
 
-	@Override
-	protected String getModuleCode() {
-		return "00";
+	public String getModuleCode() {
+		return MODULE_CLASS;
 	}
 }

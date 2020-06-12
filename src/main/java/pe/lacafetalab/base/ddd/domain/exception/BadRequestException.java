@@ -1,6 +1,6 @@
 package pe.lacafetalab.base.ddd.domain.exception;
 
-import pe.lacafetalab.base.ddd.domain.code.AppCode;
+import pe.lacafetalab.base.ddd.domain.code.EnumCodeType;
 
 public class BadRequestException extends AppException {
 	private static final long serialVersionUID = 1L;
@@ -14,7 +14,7 @@ public class BadRequestException extends AppException {
 	 * @param code
 	 */
 
-	public BadRequestException(AppCode code) {
+	public <C extends Enum<C> & EnumCodeType> BadRequestException(C code) {
 		this(code, "");
 	}
 
@@ -22,18 +22,32 @@ public class BadRequestException extends AppException {
 		this(code, "");
 	}
 
-	public BadRequestException(AppCode code, String message) {
+	public <C extends Enum<C> & EnumCodeType> BadRequestException(C code, String message) {
 		this(code, message, null);
 	}
 
+	/**
+	 * Instanstiate a BadRequestException object.
+	 *
+	 * @deprecated Try to use the one with code EnumCodeType enum object parameter.
+	 * 
+	 */
+	@Deprecated
 	public BadRequestException(Integer code, String message) {
 		this(code, message, null);
 	}
 
-	public BadRequestException(AppCode code, String message, Object data) {
+	public <C extends Enum<C> & EnumCodeType> BadRequestException(C code, String message, Object data) {
 		super(STATUS_CODE, code, message, data, null);
 	}
 
+	/**
+	 * Instanstiate a BadRequestException object.
+	 *
+	 * @deprecated Try to use the one with code EnumCodeType enum object parameter.
+	 * 
+	 */
+	@Deprecated
 	public BadRequestException(Integer code, String message, Object data) {
 		super(STATUS_CODE, code, message, data, null);
 	}

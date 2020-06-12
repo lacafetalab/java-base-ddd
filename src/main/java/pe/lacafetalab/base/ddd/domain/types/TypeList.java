@@ -34,6 +34,14 @@ public abstract class TypeList<T> extends TypeBase<List<T>> {
 		}
 	}
 
+	public boolean hasAnyRepeated() {
+		if (isEmpty()) {
+			return false;
+		}
+		Set<T> set = new HashSet<>();
+		return values().stream().anyMatch(t -> !set.add(t));
+	}
+
 	public boolean areAllUnique() {
 		if (isEmpty()) {
 			return true;
