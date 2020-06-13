@@ -24,6 +24,6 @@ class AppExceptionSpec extends Specification {
 
         where:
             a   | b | c       || d    | e         | f
-            400 | 1 | "texto" || 400 || 400000001 | "texto"
+            400 | 1 | "texto" || 400 || 400000006 | "texto"
     }
 }
