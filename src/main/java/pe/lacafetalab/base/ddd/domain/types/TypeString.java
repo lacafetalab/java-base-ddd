@@ -69,6 +69,13 @@ public abstract class TypeString extends TypeBase<String> {
 		}
 	}
 
+	protected void sanitize() {
+		if (this.isNull()){
+			return;
+		}
+		this.setValue(this.value().trim());
+	}
+
 	@Override
 	public String toString() {
 		if (this.isNull()) {
