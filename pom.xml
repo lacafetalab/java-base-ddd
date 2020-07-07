@@ -5,7 +5,7 @@
 
     <groupId>pe.lacafetalab</groupId>
     <artifactId>base-ddd</artifactId>
-    <version>0.0.34</version>
+    <version>0.0.35</version>
     <name>baseDdd</name>
     <description>Project for ddd base, SDA</description>
 
