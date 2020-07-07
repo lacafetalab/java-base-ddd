@@ -24,6 +24,7 @@ public abstract class TypeInteger extends TypeBase<Integer> {
 		super(org.apache.commons.lang3.math.NumberUtils.isDigits(value)
 				? org.apache.commons.lang3.math.NumberUtils.createInteger(value)
 				: null);
+		verifyIsNotNull(ex);
 	}
 
 	public void verifyIsGreaterThanZero(BadRequestException ex) {
