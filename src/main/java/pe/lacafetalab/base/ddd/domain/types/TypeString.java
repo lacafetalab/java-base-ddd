@@ -69,8 +69,32 @@ public abstract class TypeString extends TypeBase<String> {
 		}
 	}
 
+	public void verifyIsAlpha(BadRequestException ex) {
+		if (!StringUtils.isAlpha(value())) {
+			throw ex;
+		}
+	}
+
+	public void verifyIsAlphaSpace(BadRequestException ex) {
+		if (!StringUtils.isAlphaSpace(value())) {
+			throw ex;
+		}
+	}
+
+	public void verifyIsNumeric(BadRequestException ex) {
+		if (!StringUtils.isNumeric(value())) {
+			throw ex;
+		}
+	}
+
+	public void verifyIsNumericSpace(BadRequestException ex) {
+		if (!StringUtils.isNumericSpace(value())) {
+			throw ex;
+		}
+	}
+
 	protected void sanitize() {
-		if (this.isNull()){
+		if (this.isNull()) {
 			return;
 		}
 		this.setValue(this.value().trim());
